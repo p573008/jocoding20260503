@@ -1,0 +1,67 @@
+/* Add styles here */
+
+.partnership-form-section {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  font-family: sans-serif;
+}
+
+.partnership-form-section h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.partnership-form .form-group {
+  margin-bottom: 15px;
+}
+
+.partnership-form label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+  font-weight: bold;
+}
+
+.partnership-form input[type="text"],
+.partnership-form input[type="email"],
+.partnership-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box; /* Ensures padding doesn't increase total width */
+  font-size: 16px;
+}
+
+.partnership-form textarea {
+  resize: vertical; /* Allow vertical resizing */
+}
+
+.partnership-form input:focus,
+.partnership-form textarea:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+.partnership-form button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.partnership-form button[type="submit"]:hover {
+  background-color: #0056b3;
+}
