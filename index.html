@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hello World</title>
+  <link href='/style.css' rel='stylesheet'>
+</head>
+<body>
+  <h1>오늘 뭐 먹지?</h1>
+  <button onclick="console.log('hello');">Press me</button>
+  <script defer type="text/javascript" src="/main.js"></script>
+
+  <section class="partnership-form-section">
+    <h2>Partnership Inquiry</h2>
+    <form action="https://formspree.io/f/meenelbj" method="POST" class="partnership-form">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+      </div>
+      <button type="submit">Submit Inquiry</button>
+    </form>
+  </section>
+</body>
+</html>
