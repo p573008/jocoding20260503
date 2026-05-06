@@ -1,21 +1,31 @@
 const URL = "https://teachablemachine.withgoogle.com/models/Sa53Lxg8p/";
 
-let model, labelContainer, maxPredictions;
+let model, maxPredictions;
 
 const uploadContainer = document.getElementById("upload-container");
 const imageUpload = document.getElementById("image-upload");
 const imagePreview = document.getElementById("image-preview");
-const uploadGuide = document.getElementById("upload guide");
+const uploadGuide = document.getElementById("upload-guide");
 const loadingSpinner = document.getElementById("loading-spinner");
 const resultMessage = document.getElementById("result-message");
 const reUploadBtn = document.getElementById("re-upload-btn");
+const labelContainer = document.getElementById("label-container");
+
+let isModelLoaded = false;
 
 // Load the image model
 async function loadModel() {
-    const modelURL = URL + "model.json";
-    const metadataURL = URL + "metadata.json";
-    model = await tmImage.load(modelURL, metadataURL);
-    maxPredictions = model.getTotalClasses();
+    try {
+        const modelURL = URL + "model.json";
+        const metadataURL = URL + "metadata.json";
+        model = await tmImage.load(modelURL, metadataURL);
+        maxPredictions = model.getTotalClasses();
+        isModelLoaded = true;
+        console.log("Model loaded successfully");
+    } catch (e) {
+        console.error("Model load failed", e);
+        resultMessage.innerHTML = "모델을 불러오지 못했습니다. 인터넷 연결을 확인해주세요.";
+    }
 }
 
 loadModel();
@@ -54,28 +64,40 @@ imageUpload.addEventListener("change", (e) => {
 reUploadBtn.addEventListener("click", () => {
     imageUpload.value = "";
     imagePreview.classList.add("hidden");
-    document.getElementById("upload-guide").classList.remove("hidden");
+    uploadGuide.classList.remove("hidden");
     resultMessage.innerHTML = "";
     labelContainer.innerHTML = "";
     reUploadBtn.classList.add("hidden");
 });
 
 async function handleImage(file) {
+    if (!isModelLoaded) {
+        alert("모델이 아직 로딩 중입니다. 잠시만 기다려주세요.");
+        return;
+    }
+
     const reader = new FileReader();
     reader.onload = async (e) => {
         imagePreview.src = e.target.result;
-        imagePreview.classList.remove("hidden");
-        document.getElementById("upload-guide").classList.add("hidden");
         
-        loadingSpinner.classList.remove("hidden");
-        labelContainer.innerHTML = ""; // 기존 결과 초기화
-        
-        // 잠시 지연을 주어 이미지가 렌더링될 시간을 줌
-        setTimeout(async () => {
-            await predict();
-            loadingSpinner.classList.add("hidden");
-            reUploadBtn.classList.remove("hidden");
-        }, 500);
+        // 이미지 객체가 완전히 로드된 후 분석 시작
+        imagePreview.onload = async () => {
+            imagePreview.classList.remove("hidden");
+            uploadGuide.classList.add("hidden");
+            loadingSpinner.classList.remove("hidden");
+            labelContainer.innerHTML = "";
+            resultMessage.innerHTML = "";
+
+            try {
+                await predict();
+            } catch (error) {
+                console.error("Prediction error:", error);
+                resultMessage.innerHTML = "분석 중 오류가 발생했습니다.";
+            } finally {
+                loadingSpinner.classList.add("hidden");
+                reUploadBtn.classList.remove("hidden");
+            }
+        };
     };
     reader.readAsDataURL(file);
 }
@@ -84,7 +106,7 @@ async function predict() {
     const prediction = await model.predict(imagePreview);
     let topPrediction = { className: "", probability: 0 };
 
-    labelContainer.innerHTML = ""; // 컨테이너 초기화
+    labelContainer.innerHTML = ""; 
     for (let i = 0; i < maxPredictions; i++) {
         const className = prediction[i].className;
         const probability = prediction[i].probability;
