@@ -1,63 +1,51 @@
-<!DOCTYPE html>
-<html lang="ko">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 강아지 고양이 관상 테스트</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hello World</title>
+  <link href='/style.css' rel='stylesheet'>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>AI 강아지 고양이 관상 테스트</h1>
-            <p class="subtitle">나는 강아지상일까, 고양이상일까? 사진을 올려보세요!</p>
-        </header>
+  <h1>오늘 뭐 먹지?</h1>
+  <button onclick="console.log('hello');">Press me</button>
+  <script defer type="text/javascript" src="/main.js"></script>
 
-        <main>
-            <div class="test-area">
-                <div class="upload-container" id="upload-container">
-                    <input type="file" id="image-upload" accept="image/*" class="hidden">
-                    <div id="image-preview-container">
-                        <img id="image-preview" class="hidden" src="#" alt="미리보기">
-                        <div id="upload-guide">
-                            <i class="upload-icon">📸</i>
-                            <p>클릭하여 사진을 업로드하거나<br>이미지를 여기에 끌어다 놓으세요</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div id="loading-spinner" class="hidden">AI 분석 중...</div>
-                <div id="result-message" class="result-message"></div>
-                <div id="label-container"></div>
-                
-                <button type="button" id="re-upload-btn" class="btn secondary hidden">다른 사진으로 테스트하기</button>
-            </div>
-        </main>
+  <section class="partnership-form-section">
+    <h2>Partnership Inquiry</h2>
+    <form action="https://formspree.io/f/meenelbj" method="POST" class="partnership-form">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+      </div>
+      <button type="submit">Submit Inquiry</button>
+    </form>
+  </section>
 
-        <section class="disqus-section">
-            <div id="disqus_thread"></div>
-        </section>
-
-        <footer>
-            <p>&copy; 2024 AI 관상 테스트. All rights reserved.</p>
-        </footer>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
-    <script src="main.js"></script>
-    <script>
-        var disqus_config = function () {
-            this.page.url = window.location.href;
-            this.page.identifier = window.location.pathname;
-        };
-        (function() {
-            var d = document, s = d.createElement('script');
-            s.src = 'https://vibe-coding-1.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-        })();
-    </script>
+  <div id="disqus_thread"></div>
+  <script>
+      /**
+      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+      var disqus_config = function () {
+          this.page.url = window.location.href;  // 현재 페이지의 전체 URL
+          this.page.identifier = window.location.pathname; // 페이지의 고유 식별자 (경로)
+      };
+      (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://vibe-coding-1.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </body>
 </html>
